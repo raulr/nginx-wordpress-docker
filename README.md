@@ -7,6 +7,10 @@ The Nginx configuration in this image is based on the guidelines given by the [W
 
     $ docker run --name some-nginx --link some-wordpress:wordpress --volumes-from some-wordpress -d -p 8080:80 raulr/nginx-wordpress
 
+#### Environment Variables
+
+* `POST_MAX_SIZE`: Sets max size of post data allowed. Also affects file uploads (defaults to `64m`).
+
 ### ... via [`docker-compose`](https://github.com/docker/compose)
 
 Example `docker-compose.yml`:
@@ -24,6 +28,8 @@ nginx:
    - wordpress
   ports:
    - "8080:80"
+  environment:
+    POST_MAX_SIZE: 128m
 db:
   image: mariadb
   environment:
