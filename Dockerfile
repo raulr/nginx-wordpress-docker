@@ -1,4 +1,4 @@
-FROM nginx:1.9.9
+FROM nginx:latest
 
 COPY default.conf /etc/nginx/conf.d/default.conf
 COPY wordpress.conf /etc/nginx/global/wordpress.conf
