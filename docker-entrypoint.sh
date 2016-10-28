@@ -42,9 +42,6 @@ if [ "$1" == nginx ]; then
     else
         sed -i '/include global\/proxy.conf;/d' /etc/nginx/conf.d/default.conf
     fi
-
-    cat /etc/nginx/conf.d/default.conf
-    cat /etc/nginx/global/proxy.conf
 fi
 
 exec "$@"
