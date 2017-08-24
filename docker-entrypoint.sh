@@ -27,8 +27,8 @@ if [ "$1" == nginx ]; then
     : "${BEHIND_PROXY:=$([ -z ${VIRTUAL_HOST} ] && echo "false" || echo "true")}"
     : "${REAL_IP_HEADER:=X-Forwarded-For}"
     : "${REAL_IP_FROM:=172.17.0.0/16}"
-	: "${WP_CONTAINER_NAME:=wordpress}"
-	
+    : "${WP_CONTAINER_NAME:=wordpress}"
+
     common_post_max_size
 
     sed -i 's/client_max_body_size *[0-9]\+[kKmM]\?/client_max_body_size '"${POST_MAX_SIZE}"'/' /etc/nginx/conf.d/default.conf
