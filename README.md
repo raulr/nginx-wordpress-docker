@@ -12,7 +12,8 @@ The Nginx configuration in this image is based on the guidelines given by the [W
 * `POST_MAX_SIZE`: Sets max size of post data allowed. Also affects file uploads (defaults to `64m`).
 * `BEHIND_PROXY`: Set to `true` if this container is behind a reverse proxy (defaults to `false` unless `VIRTUAL_HOST` environment variable is set).
 * `REAL_IP_HEADER`: Defines the request header that will be used to obtain the real client IP when `BEHIND_PROXY` is set to `true` (defaults to `X-Forwarded-For`).
-* `REAL_IP_FROM`: Defines trusted addresses to obtain the real client IP when `BEHIND_PROXY` is set to `true` (defaults to `172.17.0.0/16`).
+* `REAL_IP_FROM`: Defines trusted addresses to obtain the real client IP when `BEHIND_PROXY` is set to `true` (defaults to `172.16.0.0/12`).
+* `WP_CONTAINER_NAME`: Defines your Wordpress (PHP-FPM) container's name aka fastcgi_pass (defaults to `wordpress`).
 
 ### ... via [`docker-compose`](https://github.com/docker/compose)
 

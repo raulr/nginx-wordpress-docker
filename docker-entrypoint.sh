@@ -27,12 +27,14 @@ if [ "$1" == nginx ]; then
     : "${BEHIND_PROXY:=$([ -z ${VIRTUAL_HOST} ] && echo "false" || echo "true")}"
     : "${REAL_IP_HEADER:=X-Forwarded-For}"
     : "${REAL_IP_FROM:=172.17.0.0/16}"
+    : "${WP_CONTAINER_NAME:=wordpress}"
 
     common_post_max_size
 
     sed -i 's/client_max_body_size *[0-9]\+[kKmM]\?/client_max_body_size '"${POST_MAX_SIZE}"'/' /etc/nginx/conf.d/default.conf
     sed -i 's/upload_max_filesize *= *[0-9]\+[kKmMgG]\?/upload_max_filesize='"${POST_MAX_SIZE}"'/' /etc/nginx/global/wordpress.conf
     sed -i 's/post_max_size *= *[0-9]\+[kKmMgG]\?/post_max_size='"${POST_MAX_SIZE}"'/' /etc/nginx/global/wordpress.conf
+    sed -i 's/fastcgi_pass .*;/fastcgi_pass '"$(escape_sed "${WP_CONTAINER_NAME}")"':9000;/' /etc/nginx/global/wordpress.conf
 
     if [ "${BEHIND_PROXY}" == "true" ]; then
         sed -i 's/real_ip_header .*;/real_ip_header '"$(escape_sed "${REAL_IP_HEADER}")"';/' /etc/nginx/global/proxy.conf
