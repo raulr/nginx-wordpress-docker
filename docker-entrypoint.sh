@@ -26,7 +26,7 @@ if [ "$1" == nginx ]; then
     : "${POST_MAX_SIZE:=64m}"
     : "${BEHIND_PROXY:=$([ -z ${VIRTUAL_HOST} ] && echo "false" || echo "true")}"
     : "${REAL_IP_HEADER:=X-Forwarded-For}"
-    : "${REAL_IP_FROM:=172.17.0.0/16}"
+    : "${REAL_IP_FROM:=172.16.0.0/12}"
     : "${WP_CONTAINER_NAME:=wordpress}"
 
     common_post_max_size
